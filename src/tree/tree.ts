@@ -82,33 +82,33 @@ export interface ITree {
 	 * Expands an element.
 	 * The returned promise returns a boolean for whether the element was expanded or not.
 	 */
-	expand(element: any): Promise;
+	expand(element: any): Promise<boolean>;
 
 	/**
 	 * Expands several elements.
 	 * The returned promise returns a boolean array for whether the elements were expanded or not.
 	 */
-	expandAll(elements?: any[]): Promise;
+	expandAll(elements?: any[]): Promise<boolean>;
 
 	/**
 	 * Collapses an element.
 	 * The returned promise returns a boolean for whether the element was collapsed or not.
 	 */
-	collapse(element: any, recursive?: boolean): Promise;
+	collapse(element: any, recursive?: boolean): Promise<boolean>;
 
 	/**
 	 * Collapses several elements.
 	 * Provide no arguments and it will recursively collapse all elements in the tree
 	 * The returned promise returns a boolean for whether the elements were collapsed or not.
 	 */
-	collapseAll(elements?: any[], recursive?: boolean): Promise;
+	collapseAll(elements?: any[], recursive?: boolean): Promise<boolean>;
 
 	/**
 	 * Collapses several elements.
 	 * Collapses all elements at the greatest tree depth that has expanded elements.
 	 * The returned promise returns a boolean for whether the elements were collapsed or not.
 	 */
-	collapseDeepestExpandedLevel(): Promise;
+	collapseDeepestExpandedLevel(): Promise<boolean>;
 
 	/**
 	 * Toggles an element's expansion state.
@@ -371,12 +371,12 @@ export interface IDataSource {
 	/**
 	 * Returns the element's children as an array in a promise.
 	 */
-	getChildren(tree: ITree, element: any): Promise;
+	getChildren(tree: ITree, element: any): Promise<any>;
 
 	/**
 	 * Returns the element's parent in a promise.
 	 */
-	getParent(tree: ITree, element: any): Promise;
+	getParent(tree: ITree, element: any): Promise<any>;
 
 	/**
 	 * Returns whether an element should be expanded when first added to the tree.
