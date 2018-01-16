@@ -238,7 +238,7 @@ export function top<T>(array: T[], compare: (a: T, b: T) => number, n: number): 
  */
 export function topAsync<T>(array: T[], compare: (a: T, b: T) => number, n: number, batch: number): Promise<T[]> {
 	if (n === 0) {
-		return Promise.as([]);
+		return Promise.resolve([]);
 	}
 	let canceled = false;
 	return new Promise((resolve, reject) => {
