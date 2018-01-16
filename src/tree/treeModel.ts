@@ -354,14 +354,14 @@ export class Item {
 		this._onDidReveal.fire(eventData);
 	}
 
-	public expand(): Promise {
+	public expand(): Promise<boolean> {
 		if (this.isExpanded() || !this.doesHaveChildren || this.lock.isLocked(this)) {
 			return Promise.resolve(false);
 		}
 
 		var result = this.lock.run(this, () => {
 			var eventData: IItemExpandEvent = { item: this };
-			var result: Promise;
+			var result: Promise<boolean>;
 			this._onExpand.fire(eventData);
 
 			if (this.needsChildrenRefresh) {
@@ -391,7 +391,7 @@ export class Item {
 		});
 	}
 
-	public collapse(recursive: boolean = false): Promise {
+	public collapse(recursive: boolean = false): Promise<boolean> {
 		if (recursive) {
 			var collapseChildrenPromise = Promise.resolve(null);
 			this.forEachChild((child) => {
@@ -984,7 +984,7 @@ export class TreeModel {
 		});
 	}
 
-	public expand(element: any): Promise {
+	public expand(element: any): Promise<boolean> {
 		var item = this.getItem(element);
 
 		if (!item) {
@@ -994,7 +994,7 @@ export class TreeModel {
 		return item.expand();
 	}
 
-	public expandAll(elements?: any[]): Promise {
+	public expandAll(elements?: any[]): Promise<boolean> {
 		if (!elements) {
 			elements = [];
 
@@ -1013,7 +1013,7 @@ export class TreeModel {
 		return Promise.join(promises);
 	}
 
-	public collapse(element: any, recursive: boolean = false): Promise {
+	public collapse(element: any, recursive: boolean = false): Promise<boolean> {
 		var item = this.getItem(element);
 
 		if (!item) {
@@ -1023,7 +1023,7 @@ export class TreeModel {
 		return item.collapse(recursive);
 	}
 
-	public collapseAll(elements: any[] = null, recursive: boolean = false): Promise {
+	public collapseAll(elements: any[] = null, recursive: boolean = false): Promise<boolean> {
 		if (!elements) {
 			elements = [this.input];
 			recursive = true;
@@ -1035,7 +1035,7 @@ export class TreeModel {
 		return Promise.join(promises);
 	}
 
-	public collapseDeepestExpandedLevel(): Promise {
+	public collapseDeepestExpandedLevel(): Promise<boolean> {
 		var levelToCollapse = this.findDeepestExpandedLevel(this.input, 0);
 
 		var items = [this.input];

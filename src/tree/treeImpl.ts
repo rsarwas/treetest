@@ -158,23 +158,23 @@ export class Tree implements _.ITree {
 		return this.model.refresh(element, recursive);
 	}
 
-	public expand(element: any): Promise {
+	public expand(element: any): Promise<boolean> {
 		return this.model.expand(element);
 	}
 
-	public expandAll(elements: any[]): Promise {
+	public expandAll(elements: any[]): Promise<boolean>{
 		return this.model.expandAll(elements);
 	}
 
-	public collapse(element: any, recursive: boolean = false): Promise {
+	public collapse(element: any, recursive: boolean = false): Promise<boolean> {
 		return this.model.collapse(element, recursive);
 	}
 
-	public collapseAll(elements: any[] = null, recursive: boolean = false): Promise {
+	public collapseAll(elements: any[] = null, recursive: boolean = false): Promise<boolean> {
 		return this.model.collapseAll(elements, recursive);
 	}
 
-	public collapseDeepestExpandedLevel(): Promise {
+	public collapseDeepestExpandedLevel(): Promise<boolean> {
 		return this.model.collapseDeepestExpandedLevel();
 	}
 
